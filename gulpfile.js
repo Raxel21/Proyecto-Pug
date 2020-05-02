@@ -38,5 +38,22 @@ function styles() {
     .pipe(browserSync.stream());
 }
 
+function watchAndServe() {
+  browserSync.init({
+    server: {
+      baseDir: './dist/',
+    },
+    notify: false,
+  });
+  watch(paths.styles.src, styles);
+  watch(paths.html.src + '**/*.pug', html);
+  watch(paths.html.dest + '**/*.html').on(
+    'change',
+    browserSync.reload
+  );
+}
+
 exports.html = html;
 exports.styles = styles;
+exports.watch = watchAndServe;
+exports.default = series(html, styles, watchAndServe);
