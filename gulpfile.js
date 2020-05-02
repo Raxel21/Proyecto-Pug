@@ -1,5 +1,6 @@
 // Plugins
 const { src, dest, series, watch } = require('gulp');
+const browserSync = require('browser-sync').create();
 const pug = require('gulp-pug');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
@@ -23,4 +24,19 @@ function html() {
     .pipe(dest('./dist/'));
 }
 
+function styles() {
+  return src(paths.styles.src)
+    .pipe(
+      sass({
+        includePaths: ['./app/scss/'],
+        errLogToConsole: true,
+        outputStyle: 'compressed',
+        onError: browserSync.notify,
+      })
+    )
+    .pipe(dest('./dist/css/'))
+    .pipe(browserSync.stream());
+}
+
 exports.html = html;
+exports.styles = styles;
