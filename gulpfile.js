@@ -16,3 +16,11 @@ const paths = {
     dest: './dist/',
   },
 };
+
+function html() {
+  return src(paths.html.src + '*.pug')
+    .pipe(pug())
+    .pipe(dest('./dist/'));
+}
+
+exports.html = html;
