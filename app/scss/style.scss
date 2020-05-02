@@ -1,0 +1,7 @@
+h1 {
+  transition: all 0.3s linear;
+  color: rgb(255, 0, 0);
+  &:hover {
+    color: #000;
+  }
+}
