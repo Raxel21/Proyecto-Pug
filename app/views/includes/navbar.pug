@@ -1,0 +1,39 @@
+nav.navbar.navbar-expand-lg.navbar-dark.primary-color
+
+  a.navbar-brand(href="#") Pug
+
+  button.navbar-toggler(
+    type="button" 
+    data-toggle="collapse"
+    data-target="#pugNavBar"
+    aria-controls="pugNavBar"
+    aria-expanded="false"
+    aria-label="Toggle Navigation"
+    )
+    span.navbar-toggler-icon
+
+  .collapse.navbar-collapse#pugNavBar
+    ul.navbar-nav.mr-auto
+      li.nav-item
+        a.nav-link(href="#") Home
+      li.nav-item
+        a.nav-link(href="#") Features
+      li.nav-item
+        a.nav-link(href="#") Pricing
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle#pugDropdown(
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        ) Dropdown
+        .dropdown-menu.dropdown-primary(aria-labelledby="pugDropdown")
+          a.dropdown-item(href="#") Action
+          a.dropdown-item(href="#") Another action
+          a.dropdown-item(href="#") Something else here
+    form.form-inline
+      .md-form.my-0
+        input.form-control.mr-sm-2(
+          type="text" 
+          placeholder="Search" 
+          aria-label="Search"
+          )
