@@ -11,10 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "browser-sync": "^2.26.7",
+    "browserlist": "^1.0.1",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-pug": "^4.0.1",
-    "gulp-sass": "^4.1.0"
+    "gulp-sass": "^4.1.0",
+    "mdbootstrap": "^4.17.0"
   }
 }
