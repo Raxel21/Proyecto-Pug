@@ -12,9 +12,15 @@ const paths = {
     src: './app/scss/**/*.scss',
     dest: './dist/css/',
   },
+  scripts: {
+    src: './app/js/',
+  },
   html: {
     src: './app/views/',
     dest: './dist/',
+  },
+  node: {
+    mdb: './node_modules/mdbootstrap/',
   },
 };
 
@@ -47,13 +53,46 @@ function watchAndServe() {
   });
   watch(paths.styles.src, styles);
   watch(paths.html.src + '**/*.pug', html);
+  watch(paths.scripts.src + '**/*.js', copyUserJS);
   watch(paths.html.dest + '**/*.html').on(
     'change',
     browserSync.reload
+  );
+  watch(paths.html.dest + 'js/**/*.js').on(
+    'change',
+    browserSync.reload
+  );
+}
+
+function copyBootstrapCSS() {
+  return src(paths.node.mdb + 'css/*.css').pipe(
+    dest(paths.html.dest + 'libs/css/')
+  );
+}
+
+function copyBootstrapJS() {
+  return src(paths.node.mdb + 'js/*.js').pipe(
+    dest(paths.html.dest + 'libs/js/')
+  );
+}
+
+function copyUserJS() {
+  return src(paths.scripts.src + '**/*.js').pipe(
+    dest(paths.html.dest + 'js/')
   );
 }
 
 exports.html = html;
 exports.styles = styles;
 exports.watch = watchAndServe;
-exports.default = series(html, styles, watchAndServe);
+exports.copy = series(
+  copyBootstrapCSS,
+  copyBootstrapJS,
+  copyUserJS
+);
+exports.default = series(
+  html,
+  copyUserJS,
+  styles,
+  watchAndServe
+);
